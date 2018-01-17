@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Material Login Form</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="__STATIC__/css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<!-- Mixins-->
+<!-- Pen Title-->
+<div class="pen-title">
+  <h1>老用户</h1><span><i class='fa fa-code'></i>  <a href='http://andytran.me'></a></span>
+</div>
+<div class="rerun"><a href="">重置</a></div>
+<div class="container">
+  <div class="card"></div>
+  <div class="card">
+    <h1 class="title">登录</h1>
+     <form id="form1" onsubmit="return false" method="post" action="">
+      <div class="input-container">
+        <input type="text"  name="username" required="required"/>
+        <label for="#{label}">用户名</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password"  name="password" required="required"/>
+        <label for="#{label}">密码</label>
+        <div class="bar"></div>
+      </div>
+      <div class="footer"> <input type="checkbox" name="xuanze" value="1" />一星期内不用登录</div>
+      <div class="button-container">
+        <input style="outline: 0;cursor: pointer;position: relative;display: inline-block;background: 0;width: 240px;border: 1px solid #ed2553;padding: 20px 0;font-size: 24px;font-weight: 600;color:#ed2553;line-height: 1;text-transform: uppercase;overflow: hidden;-webkit-transition: .3s ease;transition: .3s ease;margin-top: 20px" type="button" value="登录"  onclick="login()"/>
+      </div>
+      
+    </form>
+  </div>
+  <div class="card alt">
+    <div class="toggle"></div>
+    <h1 class="title">注册
+      <div class="close"></div>
+    </h1>
+    <form id="form2" onsubmit="return false" method="post" action="">
+      <div class="input-container">
+        <input type="text" id="#{label}" name="username" required="required"/>
+        <label for="#{label}">Username</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="#{label}" name="password" required="required"/>
+        <label for="#{label}">密码</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="#{label}" name="password1" required="required"/>
+        <label for="#{label}">确认密码</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <input style="outline: 0;cursor: pointer;position: relative;display: inline-block;background: 0;width: 240px;border: 1px solid #ed2553;padding: 20px 0;font-size: 24px;font-weight: 600;background-color:#fff;color:#ed2553;line-height: 1;text-transform: uppercase;overflow: hidden;-webkit-transition: .3s ease;transition: .3s ease;margin-top: 20px" type="button" value="注册"  onclick="reg()"/>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Portfolio--><a id="portfolio" href="http://andytran.me/" title="View my portfolio!"><i class="fa fa-link"></i></a>
+<!-- CodePen--><a id="codepen" href="https://codepen.io/andytran/" title="Follow me!"><i class="fa fa-codepen"></i></a>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  
+
+    <script  src="__STATIC__/js/index.js"></script>
+
+<script type="text/javascript">
+        function login() {
+            $.ajax({
+            //几个参数需要注意一下
+                url: "{:URL('Login/do_login')}" ,//url
+                 type: "POST",//方法类型
+                data:$('#form1').serialize(),
+                success: function (result) {
+                  if(result.status)
+                  {
+                      alert(result.msg);
+                      window.location.href='/index.php/Index/index/newpage'
+                  }
+                  else{
+                      alert(result.msg);
+                      window.location.href='/index.php/Index/index'
+                  };
+                    
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        }
+
+    </script>
+    <script type="text/javascript">
+        function reg() {
+            $.ajax({
+            //几个参数需要注意一下
+                url: "{:URL('Login/do_reg')}" ,//url
+                type: "POST",//方法类型
+                data:$('#form2').serialize(),
+                success: function (result) {
+                  if(result.status)
+                  {
+                      alert(result.msg);
+                      window.location.href='/index.php/Index/index/index'
+                  }
+                  else{
+                      alert(result.msg);
+                  };
+                      
+                },
+                error : function() {
+                    alert("注册失败");
+                }
+            });
+        }
+
+    </script>
+
+
+
+
+</body>
+
+</html>
